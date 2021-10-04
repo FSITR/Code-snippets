@@ -1,1 +1,4 @@
-
+- This script simply extracts emails from Outlook and converts them into a Pandas dataframe.
+- You will be prompted by Outlook for allowing access.
+- Senders, recipients and email meta data are collected.
+- This data may be used for time series analysis, language processing, spam classification etc.
