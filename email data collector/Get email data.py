@@ -2,7 +2,6 @@ import win32com.client as win32
 import pandas as pd
 
 #outlook = win32.gencache.EnsureDispatch("Outlook.Application").GetNamespace("MAPI")
-#C:\Users\jbuck\AppData\Local\Temp
 #https://stackoverflow.com/questions/33267002/why-am-i-suddenly-getting-a-no-attribute-clsidtopackagemap-error-with-win32com
 
 outlook = win32.Dispatch("Outlook.Application").GetNamespace("MAPI") # use this instead, or delete gen_.py in temp folder
