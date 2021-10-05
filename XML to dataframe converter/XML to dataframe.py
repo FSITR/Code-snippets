@@ -20,11 +20,10 @@ def parse_levels(node,L,ID,data_dict):
     #process text for printing
     indent = '\t'*L
     tag = str(node.tag)
-    attribute = str(node.attrib) if len(node.attrib)>0 else nan                     #Replaced '' with nan
-    text = nan if node.text is None else node.text                                  #Replaced '' with nan
+    attribute = str(node.attrib) if len(node.attrib)>0 else nan
+    text = nan if node.text is None else node.text
     ID_print = ''.join(['['+str(x)+']' for x in ID])
-    #print(indent + tag +': '+ text + attribute,ID_print)
-    data_dict.update({ID_print:[len(indent),tag,text,attribute]})                   #NEW
+    data_dict.update({ID_print:[len(indent),tag,text,attribute]})
     #recursion for accessing all levels
     if child_count > 0:
         L+=1
@@ -70,13 +69,9 @@ print('***SUMMARY***\n___________')
 print('Counts:\n',)
 print(df.count())
 print('\n***Level 0 items***\n___________')
-##df.groupby('Level').apply(lambda g: g[g['Level']==0]['Tag']).reset_index(drop=True)
-##df['Level'].value_counts().sort_index().plot.bar()
 a= df[['Level','Tag']].apply(lambda x: x.name if x[0]==0 else nan,axis=1).ffill().value_counts().to_frame().rename(columns={0:'count_elmnts'})
 HL_counts = a.merge(df['Tag'],how='left',left_index=True,right_index=True)[['Tag','count_elmnts']].reset_index().rename(columns={'index':'orig_index'}).sort_values(by='orig_index')
 print(HL_counts)
-#df['ID_dsc'] = df['Location'].apply(get_tags_from_location)
-#print(df[df['Attribute'].notna()].to_string())
 print('\n***Complete***')
 input()
 
@@ -97,8 +92,6 @@ gb = df.groupby(['Level','Tag']).count()[['Text','Attribute']] #remove 'Level' i
 print(gb[gb.sum(axis=1)>0].sort_values(['Level','Text'],ascending=[True,False]).to_string())
 
 ##################################################################
-# df['Import']='EDIT MANUALLY'
-# df['Alias']='EDIT MANUALLY'
 
 file = file.split('.')[0]+' - flat XML.xlsx'
 path = os.path.join(directory,file)
