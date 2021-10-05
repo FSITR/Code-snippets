@@ -1,3 +1,6 @@
+'''
+Run this program and follow the directions, you will give the name of an XML file to the scirpt which will then convert this and return an Excel file. 
+'''
 import os
 import xml.etree.ElementTree as et
 import pandas as pd
