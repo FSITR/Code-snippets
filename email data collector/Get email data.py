@@ -6,9 +6,9 @@ Run this script whilst you have Outlook open and it will begin extracting your e
 #outlook = win32.gencache.EnsureDispatch("Outlook.Application").GetNamespace("MAPI")
 #https://stackoverflow.com/questions/33267002/why-am-i-suddenly-getting-a-no-attribute-clsidtopackagemap-error-with-win32com
 
-outlook = win32.Dispatch("Outlook.Application").GetNamespace("MAPI") # use this instead, or delete gen_.py in temp folder
-
+email_address = input('Enter your email address\n') # this is the recipient email of interest (only effective if you receive emails to different email addresses).
 folder_name = 'inbox'
+outlook = win32.Dispatch("Outlook.Application").GetNamespace("MAPI") # use this instead, or delete gen_.py in temp folder
 
 folder_dict = {'inbox':6,'Deleted':3}
 code = folder_dict[folder_name]
@@ -54,7 +54,7 @@ for i,e in enumerate(folder):
         for l in recips_emails:
             if len(l)==1 and l[0]==None:
                 print('***PASS***')
-            elif True in ['support@wildeanalysis.co.uk' in r for r in l]: #changed if to elif because of the new lines above
+            elif True in [email_address in r for r in l]: #changed if to elif because of the new lines above
                 print(i,str(sent_dt),str(sent_time),sender_email,e.Subject)
                 res_dict['SDate'] = sent_dt
                 res_dict['STime'] = sent_time
